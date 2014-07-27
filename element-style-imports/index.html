@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Style imports; do they work?</title>
+    <script src="http://www.polymer-project.org/platform.js"></script>
+    <link rel="import" href="thing.html">
+    <style>
+      body {
+        margin: 0;
+      }
+      section {
+        border: 1px solid #eeeeee;
+        margin: 20px;
+        padding: 10px;
+        position: relative;
+      }
+      section header {
+        background: #ffffff;
+        color: #666666;
+        font-size: 14px;
+        left: 8px;
+        padding: 0 2px;
+        position: absolute;
+        top: -9px;
+      }
+    </style>
+    <script>
+      var prototype = Object.create(HTMLElement.prototype);
+      prototype.createdCallback = function() {
+        // Cheating.
+        this.createShadowRoot().innerHTML =
+            '<link rel="import" href="thing-style.html">' +
+            '<style>#content:after {content: " - inline style";color: blue;}</style>' +
+            '<div id="content">custom element content</div>';
+      };
+
+      document.registerElement('x-custom-thing', {prototype: prototype});
+    </script>
+  </head>
+  <body>
+
+    <section>
+      <div id="content">Main document content</div>
+    </section>
+
+    <section>
+      <header>imported styles within a Polymer element</header>
+      <x-thing></x-thing>
+    </section>
+
+    <section>
+      <header>imported styles within a custom element</header>
+      <x-custom-thing></x-custom-thing>
+    </section>
+
+    <section id="raw-section">
+      <header>imported styles within a raw template</header>
+      <template id="raw">
+        <link rel="import" href="thing-style.html">
+        <div id="content">raw content</div>
+      </template>
+      <script>
+        var template = document.getElementById('raw');
+        var content = document.importNode(template.content, true);
+        document.getElementById('raw-section').appendChild(content);
+      </script>
+    </section>
+
+  </body>
+</html>

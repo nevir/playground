@@ -1,0 +1,14 @@
+<link rel="import" href="http://www.polymer-project.org/components/polymer/polymer.html">
+
+<polymer-element name="x-thing" noscript>
+  <template>
+    <link rel="import" href="thing-style.html">
+    <style>
+      #content:after {
+        content: " - inline style";
+        color: blue;
+      }
+    </style>
+    <div id="content">polymer element content</div>
+  </template>
+</polymer-element>
