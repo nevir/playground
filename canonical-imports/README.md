@@ -34,6 +34,9 @@ Thoughts
 Potential Solution
 ------------------
 
+_You might want to check out the `index-*.html`s under [`app/`](app/) to get a
+better idea of what I'm talking about here._
+
 Because the hosted+vulcanized problem is so thorny, and there appears to be no
 real winning case, I'd like to focus on making the URL deduplication approach
 as easy as possible. ...while still supporting vulcanization for the common
