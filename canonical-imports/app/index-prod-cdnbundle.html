@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+      Here's an example where we make use of a CDN-hosted vulcanized bundle; but
+      note that we get around the overlapping assets problem by giving full
+      ownership to the app dev (and trusting the CDN to be a good citizien and
+      only bundle code _they_ own).
+    -->
+    <script>
+      // Here's a simple approach, albeit very verbose:
+      window.importMap = {
+        '//polymer-project.org/polymer.html': 'vulcanized.html',
+        'app-main.html': 'vulcanized.html',
+        'app-element1.html': 'vulcanized.html',
+        'app-element2.html': 'vulcanized.html',
+        '//cdn.com/awesome-widget.html': '//cdn.com/all-widgets.html',
+        '//cdn.com/super-widget.html': '//cdn.com/all-widgets.html'
+      };
+
+      // Or a less verbose, but more complex version:
+      window.importBundles = [
+        {
+          bundle: 'vulcanized.html',
+          sources: [
+            '//polymer-project.org/polymer.html',
+            'app-main.html',
+            'app-element1.html',
+            'app-element2.html'
+          ]
+        },
+        {
+          bundle: '//cdn.com/all-widgets.html',
+          sources: [
+            '//cdn.com/awesome-widget.html',
+            '//cdn.com/super-widget.html'
+          ]
+        }
+      ];
+    </script>
+
+    <!--
+      Note that we're being a lazy app dev, and not bothering to include Polymer
+      within app-specific elements.
+    -->
+    <link rel="import" href="//polymer-project.org/polymer.html">
+    <link rel="import" href="app-main.html">
+  </head>
+  <body>
+    <app-main></app-main>
+  </body>
+</html>

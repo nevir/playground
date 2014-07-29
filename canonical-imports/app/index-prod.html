@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--
+      Note that it would be ideal to make this a meta tag of some sort, but we
+      cannot do that if we're using the proposed `onimport` hook. These flags
+      need to be available at tokenization time.
+    -->
+    <script>
+      // Here's a simple approach, albeit very verbose:
+      window.importMap = {
+        '//polymer-project.org/polymer.html': 'vulcanized.html',
+        '//cdn.com/awesome-widget.html': 'vulcanized.html',
+        'app-main.html': 'vulcanized.html',
+        'app-element1.html': 'vulcanized.html',
+        'app-element2.html': 'vulcanized.html'
+        // Let's say that super-widget cannot be vulcanized - contains remote
+        // config of some sort - so we let that load remotely by omitting it
+        // here.
+      };
+
+      // Or a less verbose, but more complex version:
+      window.importBundles = [
+        {
+          bundle: 'vulcanized.html',
+          sources: [
+            '//polymer-project.org/polymer.html',
+            '//cdn.com/awesome-widget.html',
+            'app-main.html',
+            'app-element1.html',
+            'app-element2.html'
+          ]
+        }
+      ];
+    </script>
+
+    <!--
+      Note that we're being a lazy app dev, and not bothering to include Polymer
+      within app-specific elements.
+    -->
+    <link rel="import" href="//polymer-project.org/polymer.html">
+    <link rel="import" href="app-main.html">
+  </head>
+  <body>
+    <app-main></app-main>
+  </body>
+</html>
