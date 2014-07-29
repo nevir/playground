@@ -47,6 +47,9 @@ case.
 * Vulcanized assets are, instead, defined via configuration for the `onload`
   hook. They are configured per _application_ only.
 
+  * I.e. while resources are referenced via a canonical URL; those URLs can be
+    rewritten - **but only by application developers** (not library owners).
+
 
 Woah, woah, woah; that's crazy talk! I hear ya, but there's a lot of advantages
 here:
