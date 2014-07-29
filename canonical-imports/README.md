@@ -50,6 +50,9 @@ case.
   * I.e. while resources are referenced via a canonical URL; those URLs can be
     rewritten - **but only by application developers** (not library owners).
 
+  * Similarly, individual resources **cannot** have knowledge about vulcanized
+    bundles.
+
 
 Woah, woah, woah; that's crazy talk! I hear ya, but there's a lot of advantages
 here:
